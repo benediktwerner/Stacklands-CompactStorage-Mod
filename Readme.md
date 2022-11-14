@@ -22,6 +22,7 @@ This mod requires BepInEx to work. BepInEx is a modding framework which allows m
 
 ## Changelog
 
+- v1.0.3: Update mod icon (Thanks to @lopidav for the art!)
 - v1.0.2: Add card icons (Thanks a lot to @lopidav for making all the art!)
 - v1.0.1: Fix card names not showing up for non-English languages
 - v1.0: Initial release
