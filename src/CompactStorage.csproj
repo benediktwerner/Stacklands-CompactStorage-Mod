@@ -28,6 +28,9 @@
       <Private>false</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <IconFiles Include="..\icons\*.png"/>
+  </ItemGroup>
   <PropertyGroup>
     <GAME_NAME>Stacklands</GAME_NAME>
     <GAME_STEAM_ID>1948280</GAME_STEAM_ID>
@@ -65,10 +68,12 @@
     <Message Text="R2MM Path: $(R2MM_PATH)" Importance="high" />
     <Message Text="Output Path: $(OUTPUT_PATH)" Importance="high" />
   </Target>
-  <Target Name="CopyToOutputDirs" AfterTargets="AfterBuild">
+  <Target Name="CopyToGameDir" AfterTargets="AfterBuild">
     <RemoveDir Directories="$(TMP_OUTPUT_PATH)" />
     <MakeDir Directories="$(OUTPUT_PATH)" />
     <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(TMP_OUTPUT_PATH)" />
+    <MakeDir Directories="$(TMP_OUTPUT_PATH)/icons" />
+    <Copy SourceFiles="@(IconFiles)" DestinationFolder="$(TMP_OUTPUT_PATH)/icons" />
     <!-- <ZipDirectory Overwrite="true" SourceDirectory="$(TMP_OUTPUT_PATH)" DestinationFile="$(OUTPUT_PATH)/$(MOD_NAME)-Nexus.zip" /> -->
     <Copy SourceFiles="../manifest.json" DestinationFolder="$(TMP_OUTPUT_PATH)" />
     <Copy SourceFiles="../README.md" DestinationFolder="$(TMP_OUTPUT_PATH)" />

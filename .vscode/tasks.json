@@ -9,7 +9,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/${workspaceFolderBasename}.sln",
+        "${workspaceFolder}/CompactStorage.sln",
         "-c",
         "Release"
       ],
