@@ -39,12 +39,21 @@ namespace CompactStorage
         private static void StackedWarehousesCardCapIncrease(WorldManager __instance, ref int __result, GameBoard board)
         {
             foreach (var card in __instance.AllCards)
-            {
                 if (card.MyBoard == board && card.CardData is StackedWarehouses w)
-                {
                     __result += w.Count;
-                }
-            }
+        }
+
+        [HarmonyPatch(typeof(WorldManager), nameof(WorldManager.BoardSizeIncrease))]
+        [HarmonyPostfix]
+        private static void StackedWarehousesBoardSizeIncrease(
+            WorldManager __instance,
+            ref int __result,
+            GameBoard board
+        )
+        {
+            foreach (var card in __instance.AllCards)
+                if (card.MyBoard == board && card.CardData is StackedWarehouses w)
+                    __result += w.LighthouseCount * 10;
         }
 
         [HarmonyPatch(typeof(GameDataLoader), MethodType.Constructor)]
@@ -68,10 +77,13 @@ namespace CompactStorage
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(SokLoc), nameof(SokLoc.SetLanguage))]
-        public static void LanguageChanged(SokLoc __instance) {
-            if (SokLoc.instance == null) return;
+        public static void LanguageChanged(SokLoc __instance)
+        {
+            if (SokLoc.instance == null)
+                return;
 
-            foreach (var term in CardLoader.Translations) {
+            foreach (var term in CardLoader.Translations)
+            {
                 SokLoc.instance.CurrentLocSet.TermLookup[term.Id] = term;
             }
         }

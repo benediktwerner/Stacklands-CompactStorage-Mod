@@ -24,7 +24,8 @@
         public const string JUNGLE = "jungle";
         public const string ANY_VILL = "any_villager";
         public const string SHED = "shed";
-        public const string WAREHOSUE = "warehouse";
+        public const string WAREHOUSE = "warehouse";
+        public const string LIGHTHOUSE = "lighthouse";
         public const string STEW = "stew";
         public const string SEAFOOD_STEW = "seafood_stew";
         public const string MAGIC_DUST = "magic_dust";
