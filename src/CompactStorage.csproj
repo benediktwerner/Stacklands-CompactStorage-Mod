@@ -4,7 +4,7 @@
     <AssemblyName>CompactStorage</AssemblyName>
     <Product>CompactStorage</Product>
     <Description>Store cards more compactly</Description>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>

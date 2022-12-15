@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -13,25 +12,6 @@ namespace CompactStorage
         private static void AddCards(List<CardData> __result)
         {
             CardLoader.AddCards(__result);
-        }
-
-        [HarmonyPatch(typeof(EndOfMonthCutscenes), nameof(EndOfMonthCutscenes.FeedVillagers), MethodType.Enumerator)]
-        [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> DontDestroyEatenFoodWarehouses(
-            IEnumerable<CodeInstruction> instructions
-        )
-        {
-            return new CodeMatcher(instructions)
-                .MatchForward(
-                    false,
-                    new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(Food), "FoodValue")),
-                    new CodeMatch(OpCodes.Ldc_I4_0),
-                    new CodeMatch(OpCodes.Bgt)
-                )
-                .ThrowIfInvalid("Didn't find FoodValue <= 0 check")
-                .RemoveInstruction()
-                .Insert(Transpilers.EmitDelegate<Func<Food, int>>(food => food is FoodWarehouse ? 1 : food.FoodValue))
-                .InstructionEnumeration();
         }
 
         [HarmonyPatch(typeof(WorldManager), nameof(WorldManager.CardCapIncrease))]
@@ -54,6 +34,22 @@ namespace CompactStorage
             foreach (var card in __instance.AllCards)
                 if (card.MyBoard == board && card.CardData is StackedWarehouses w)
                     __result += w.LighthouseCount * 10;
+        }
+
+        [HarmonyPatch(typeof(FoodWarehouse), nameof(FoodWarehouse.UpdateCard))]
+        [HarmonyTranspiler]
+        private static IEnumerable<CodeInstruction> FoodWarehouseDontCallHotpotUpdateCard(
+            IEnumerable<CodeInstruction> instructions
+        )
+        {
+            return new CodeMatcher(instructions)
+                .MatchForward(
+                    false,
+                    new CodeMatch(OpCodes.Call, AccessTools.Method(typeof(Hotpot), nameof(Hotpot.UpdateCard)))
+                )
+                .ThrowIfInvalid("Didn't find Hotpot::UpdateCard() call")
+                .SetOperandAndAdvance(AccessTools.Method(typeof(Food), nameof(Food.UpdateCard)))
+                .InstructionEnumeration();
         }
 
         [HarmonyPatch(typeof(GameDataLoader), MethodType.Constructor)]
