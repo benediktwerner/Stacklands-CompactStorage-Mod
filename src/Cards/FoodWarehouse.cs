@@ -28,10 +28,10 @@ namespace CompactStorage
                     {
                         var space = GetWarehouseWithSpace();
                         if (space == null)
-                        {
                             break;
-                        }
                         space.FoodValue += food.FoodValue;
+                        card.Parent.SetChild(card.Child);
+                        card.Child = null;
                         card.DestroyCard(true, true);
                     }
                 }

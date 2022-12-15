@@ -31,6 +31,7 @@ This mod requires BepInEx to work. BepInEx is a modding framework which allows m
 
 ## Changelog
 
+- v1.0.5: Fix Food Warehouses not re-stacking left-over cards if full
 - v1.0.4: Make it work with lighthouses
 - v1.0.3: Update mod icon (Thanks to @lopidav for the art!)
 - v1.0.2: Add card icons (Thanks a lot to @lopidav for making all the art!)
