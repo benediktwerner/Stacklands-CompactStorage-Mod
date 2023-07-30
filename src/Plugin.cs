@@ -1,20 +1,36 @@
-﻿using BepInEx;
-using BepInEx.Logging;
-using HarmonyLib;
+﻿using HarmonyLib;
 
 namespace CompactStorage
 {
-    [BepInPlugin("de.benediktwerner.stacklands.compactstorage", PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    public class Plugin : BaseUnityPlugin
+    public class Plugin : Mod
     {
         public static Plugin Instance;
-        public static ManualLogSource StaticLogger;
+        public static ModLogger StaticLogger;
 
         private void Awake()
         {
             Instance = this;
             StaticLogger = Logger;
-            Harmony.CreateAndPatchAll(typeof(Patches));
+            Harmony.PatchAll(typeof(Patches));
+        }
+
+        public override void Ready()
+        {
+            WorldManager.instance.GameDataLoader.AddCardToSetCardBag(
+                SetCardBagType.AdvancedBuildingIdea,
+                Consts.Idea(Consts.STACKED_WAREHOUSES),
+                1
+            );
+            WorldManager.instance.GameDataLoader.AddCardToSetCardBag(
+                SetCardBagType.Island_AdvancedBuildingIdea,
+                Consts.Idea(Consts.FOOD_WAREHOUSE),
+                1
+            );
+            WorldManager.instance.GameDataLoader.AddCardToSetCardBag(
+                SetCardBagType.Island_AdvancedBuildingIdea,
+                Consts.Idea(Consts.MAGIC_POUCH),
+                1
+            );
         }
     }
 }

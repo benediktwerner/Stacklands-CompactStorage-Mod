@@ -1,7 +1,5 @@
 {
-  "name": "CompactStorage",
-  "description": "Store cards more compactly",
-  "version_number": "1.0.6",
-  "dependencies": ["BepInEx-BepInExPack_Stacklands-5.4.2100"],
-  "website_url": "https://github.com/benediktwerner/Stacklands-CompactStorage-Mod"
+  "id": "CompactStorage",
+  "name": "Compact Storage",
+  "version": "1.1.0"
 }

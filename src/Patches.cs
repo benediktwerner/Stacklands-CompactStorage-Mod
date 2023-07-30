@@ -52,25 +52,6 @@ namespace CompactStorage
                 .InstructionEnumeration();
         }
 
-        [HarmonyPatch(typeof(GameDataLoader), MethodType.Constructor)]
-        [HarmonyPostfix]
-        public static void InsertDrops(GameDataLoader __instance)
-        {
-            AddBoosterIdea(__instance, SetCardBag.AdvancedBuildingIdea, Consts.Idea(Consts.STACKED_WAREHOUSES));
-            AddBoosterIdea(
-                __instance,
-                SetCardBag.Island_AdvancedBuildingIdea,
-                Consts.Idea(Consts.FOOD_WAREHOUSE),
-                Consts.Idea(Consts.MAGIC_POUCH)
-            );
-        }
-
-        public static void AddBoosterIdea(GameDataLoader __instance, SetCardBag bag, params string[] cardIds)
-        {
-            var existing = __instance.GetStringForBag(bag);
-            __instance.result[bag] = existing + ", " + cardIds.Join(delimiter: ", ");
-        }
-
         [HarmonyPostfix]
         [HarmonyPatch(typeof(SokLoc), nameof(SokLoc.SetLanguage))]
         public static void LanguageChanged(SokLoc __instance)
