@@ -23,6 +23,7 @@ The ideas for the cards can be found in the advanced ideas booster pack on the M
 
 ## Changelog
 
+- v1.1.1: Show CompactStorage cards in the mod category in the Cardopedia
 - v1.1.0: Steam Workshop Support
 - v1.0.6:
   - Always prefer Food Warehouses when selecting food (like Hotpots) so you don't need to put them on Mess Halls
