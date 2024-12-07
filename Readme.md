@@ -23,6 +23,7 @@ The ideas for the cards can be found in the advanced ideas booster pack on the M
 
 ## Changelog
 
+- v1.1.2: Compatibility with Stacklands 2000
 - v1.1.1: Show CompactStorage cards in the mod category in the Cardopedia
 - v1.1.0: Steam Workshop Support
 - v1.0.6:

@@ -39,8 +39,7 @@ namespace CompactStorage
         }
 
         private MagicPouch GetPouchWithSpace() =>
-            this.MyGameCard
-                .GetAllCardsInStack()
+            this.MyGameCard.GetAllCardsInStack()
                 .FirstOrDefault(card => card.CardData is MagicPouch x && x.content.Count < x.MaxCards)
                 ?.CardData as MagicPouch;
 
@@ -89,7 +88,7 @@ namespace CompactStorage
                 );
                 Value -= card.Value;
                 StoredValue = Value;
-                WorldManager.instance.StackSend(card.MyGameCard, null);
+                WorldManager.instance.StackSend(card.MyGameCard, Vector3.zero);
                 UpdateDescription();
             }
             base.Clicked();
